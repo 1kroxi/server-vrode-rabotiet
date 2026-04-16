@@ -1,0 +1,15 @@
+{
+  "name": "fastify-pug-users",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/static": "^9.1.1",
+    "@fastify/view": "^11.1.1",
+    "fastify": "^5.8.5",
+    "pug": "^3.0.4"
+  }
+}
