@@ -1,0 +1,26 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Редактировать пользователя
+    link(rel="stylesheet" href="/public/css/style.css")
+  body
+    .container
+      h1 Редактировать пользователя
+
+      if error
+        .error= error
+
+      form(method="POST" action=`/users/${user.id}/edit`)
+        .form-group
+          label(for="name") Имя и Фамилия
+          input(type="text" id="name" name="name" value=user.name required)
+
+        .form-group
+          label(for="email") Email
+          input(type="email" id="email" name="email" value=user.email required)
+
+        .form-actions
+          button.btn.btn-primary(type="submit") Сохранить
+          a.btn.btn-secondary(href="/users") Отмена

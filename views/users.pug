@@ -1,0 +1,34 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Список пользователей
+    link(rel="stylesheet" href="/public/css/style.css")
+  body
+    .container
+      .top-bar
+        h1 Список пользователей
+        a.btn.btn-primary(href="/users/create") + Добавить пользователя
+
+      if users.length === 0
+        p.empty Пока нет пользователей.
+      else
+        table
+          thead
+            tr
+              th ID
+              th Имя
+              th Email
+              th Действия
+          tbody
+            each user in users
+              tr
+                td= user.id
+                td= user.name
+                td= user.email
+                td
+                  .actions
+                    a.btn.btn-warning(href=`/users/${user.id}/edit`) Изменить
+                    form(method="POST" action=`/users/${user.id}/delete` style="display:inline")
+                      button.btn.btn-danger(type="submit" onclick="return confirm('Удалить пользователя?')") Удалить
