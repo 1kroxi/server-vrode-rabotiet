@@ -1,0 +1,73 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Таблица лидеров — «Таблицы Шульте»
+    style
+      | * { box-sizing: border-box; margin: 0; padding: 0; }
+      | body {
+      |   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      |   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      |   min-height: 100vh;
+      |   padding: 20px;
+      | }
+      | .container {
+      |   max-width: 700px;
+      |   margin: 0 auto;
+      |   background: white;
+      |   border-radius: 20px;
+      |   padding: 30px 24px;
+      |   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      | }
+      | h1 { text-align: center; color: #333; margin-bottom: 24px; font-size: 26px; }
+      | .empty { text-align: center; color: #888; padding: 40px 0; font-size: 16px; }
+      | table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; }
+      | thead tr { background: #4CAF50; }
+      | th { padding: 13px 16px; text-align: left; color: white; font-size: 14px; font-weight: 600; }
+      | td { padding: 12px 16px; font-size: 15px; color: #333; border-bottom: 1px solid #f0f0f0; }
+      | tr:last-child td { border-bottom: none; }
+      | tbody tr:hover { background: #f9f9f9; }
+      | .rank-1 td { background: #fff8e1; font-weight: bold; }
+      | .rank-2 td { background: #fafafa; }
+      | .rank-3 td { background: #fff3e0; }
+      | .medal { font-size: 20px; }
+      | .time-val { font-weight: bold; color: #2196F3; }
+      | .actions { display: flex; gap: 12px; margin-top: 24px; justify-content: center; }
+      | .btn { display: inline-block; padding: 11px 22px; border-radius: 8px; text-decoration: none; font-size: 15px; transition: background 0.2s; }
+      | .btn-primary { background: #2196F3; color: white; }
+      | .btn-primary:hover { background: #0b7dda; }
+      | .btn-secondary { background: #f0f0f0; color: #555; }
+      | .btn-secondary:hover { background: #e0e0e0; }
+  body
+    .container
+      h1 🏆 Таблица лидеров
+      if results.length === 0
+        p.empty Пока нет результатов. Сыграйте первым!👾
+      else
+        table
+          thead
+            tr
+              th Место
+              th Игрок
+              th Время
+          tbody
+            each result, index in results
+              tr(class=index === 0 ? 'rank-1' : index === 1 ? 'rank-2' : index === 2 ? 'rank-3' : '')
+                td
+                  if index === 0
+                    span.medal 🥇
+                  else if index === 1
+                    span.medal 🥈
+                  else if index === 2
+                    span.medal 🥉
+                  else
+                    | #{index + 1}
+                td #{result.name}
+                td
+                  span.time-val #{result.time}
+                  |  сек
+      .actions
+        a.btn.btn-primary(href="/") 🎮 Играть
+        if results.length > 0
+

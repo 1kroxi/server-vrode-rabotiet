@@ -1,0 +1,36 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Таблица Шульте
+    link(rel="stylesheet" href="/public/game.css")
+  body
+    .container
+      .user-bar
+        span.user-greeting 👤 #{user.username}
+        a.btn-logout(href="/logout") Выйти
+
+      h1 Нажми цирфры по порядку👆
+
+      .game-info
+        span ⏱️ Время: 
+          span#timer 0
+          |  сек
+        span 👾 Следующее: 
+          span#nextNumber 1
+
+      .game-board#gameBoard
+
+      button#reset 🔄 Новая игра
+      a.leaderboard-link(href="/leaderboard") 🏆 Таблица лидеров
+
+    #finishBanner.finish-banner
+      .finish-card
+        h2 🎉 Отличный результат!
+        p#finishText
+        .btn-row
+          button.btn-play-again#playAgainBtn 🔄 Ещё раз
+          a.btn-leaderboard(href="/leaderboard") 🏆 Лидеры
+
+    script(src="/public/game.js")

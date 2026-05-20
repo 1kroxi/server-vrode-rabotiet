@@ -1,0 +1,57 @@
+doctype html
+html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Вход / Регистрация
+    link(rel="stylesheet" href="/public/game.css")
+  body
+    .container.auth-container
+      h1 👾 Таблица Шульте
+
+      .auth-tabs
+        button.tab-btn.active#tabLoginBtn(onclick="showTab('login')") Вход
+        button.tab-btn#tabRegisterBtn(onclick="showTab('register')") Регистрация
+
+      if error
+        .auth-message.auth-error= error
+      if success
+        .auth-message.auth-success= success
+
+      #tabLogin.auth-form
+        form(action="/login" method="POST")
+          label(for="loginEmail") Email
+          input#loginEmail(type="email" name="email" placeholder="example@mail.ru" required autocomplete="email")
+          label(for="loginPassword") Пароль
+          input#loginPassword(type="password" name="password" placeholder="Ваш пароль" required)
+          button.btn-submit(type="submit") Войти
+
+      #tabRegister.auth-form(style="display:none")
+        form(action="/register" method="POST")
+          label(for="regUsername") Имя игрока
+          input#regUsername(type="text" name="username" placeholder="Как вас зовут?" required maxlength="30")
+          label(for="regEmail") Email
+          input#regEmail(type="email" name="email" placeholder="example@mail.ru" required autocomplete="email")
+          label(for="regPassword") Пароль
+          input#regPassword(type="password" name="password" placeholder="Минимум 6 символов" required minlength="6")
+          button.btn-submit(type="submit") Создать аккаунт
+
+    script.
+
+      (function() {
+        var success = document.querySelector('.auth-success');
+        var regForm = document.getElementById('tabRegister');
+        var loginForm = document.getElementById('tabLogin');
+
+        if (success) {
+          showTab('login');
+          return;
+        }
+      })();
+
+      function showTab(tab) {
+        document.getElementById('tabLogin').style.display    = tab === 'login'    ? 'block' : 'none';
+        document.getElementById('tabRegister').style.display = tab === 'register' ? 'block' : 'none';
+        document.getElementById('tabLoginBtn').classList.toggle('active',    tab === 'login');
+        document.getElementById('tabRegisterBtn').classList.toggle('active', tab === 'register');
+      }
